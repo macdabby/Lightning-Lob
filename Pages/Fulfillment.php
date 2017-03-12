@@ -14,6 +14,7 @@ use Lightning\Tools\Template;
 use Modules\Checkout\Model\LineItem;
 use Modules\Checkout\Model\Order;
 use Modules\Lob\Connector\Checkout;
+use Modules\Lob\Model\Renderer;
 
 class Fulfillment extends Page {
 
@@ -28,6 +29,27 @@ class Fulfillment extends Page {
     public function get() {
         $order = Order::loadByID(Request::get('id', Request::TYPE_INT));
         Template::getInstance()->set('order', $order);
+    }
+
+    public function getPreview() {
+        $line_item_id = Request::get('line_item_id', Request::TYPE_INT);
+
+        if ($side = Request::get('side')) {
+            $line_item = LineItem::loadByID($line_item_id);
+            if (empty($line_item)) {
+                throw new Exception('Item not found!');
+            }
+            $renderer = new Renderer($line_item);
+            if ($side == 'front') {
+                echo $renderer->previewFront();
+            } else {
+                echo $renderer->previewBack();
+            }
+            exit;
+        } else {
+            $this->page = ['preview', 'Lob'];
+            Template::getInstance()->set('line_item_id', $line_item_id);
+        }
     }
 
     public function post() {

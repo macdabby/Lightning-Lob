@@ -8,13 +8,15 @@
             <td><input type="checkbox" checked="checked"></td>
             <td>Product</td>
             <td>Options</td>
+            <td>Preview</td>
         </tr>
         </thead>
         <?php foreach ($order->getItems() as $item): ?>
             <tr>
-                <td><input type="checkbox" checked="checked" name="checkout_order_item[<?= $item->id; ?>" value="1" /></td>
+                <td><input type="checkbox" checked="checked" name="checkout_order_item[<?= $item->id; ?>]" value="1" /></td>
                 <td><?= $item->getProduct()->title; ?></td>
                 <td><?= $item->getHTMLFormattedOptions(); ?></td>
+                <td><a href="/admin/orders/fulfillment/lob?action=preview&id=<?= $item->id; ?>" target="_blank">Preview</a></td>
             </tr>
         <?php endforeach; ?>
     </table>
