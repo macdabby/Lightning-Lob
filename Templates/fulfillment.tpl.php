@@ -16,7 +16,7 @@
                 <td><input type="checkbox" checked="checked" name="checkout_order_item[<?= $item->id; ?>]" value="1" /></td>
                 <td><?= $item->getProduct()->title; ?></td>
                 <td><?= $item->getHTMLFormattedOptions(); ?></td>
-                <td><a href="/admin/orders/fulfillment/lob?action=preview&id=<?= $item->id; ?>" target="_blank">Preview</a></td>
+                <td><a href="/admin/orders/fulfillment/lob?action=preview&line_item_id=<?= $item->id; ?>" target="_blank">Preview</a></td>
             </tr>
         <?php endforeach; ?>
     </table>
