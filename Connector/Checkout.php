@@ -15,7 +15,7 @@ use Modules\Lob\Model\Renderer;
 class Checkout {
 
     const FULFILLMENT_URL = '/admin/orders/fulfillment/lob';
-    const FULLFILLMENT_TEXT = 'Mail with Lob';
+    const FULFILLMENT_TEXT = 'Mail with Lob';
     const API_ENDPOINT = 'https://api.lob.com/v1';
 
     /**
@@ -77,6 +77,6 @@ class Checkout {
                 $item->markFulfilled();
             }
         }
-        $order->markFullfilled();
+        return $order->markFulfilled();
     }
 }

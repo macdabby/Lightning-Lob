@@ -58,6 +58,8 @@ class Fulfillment extends Page {
             throw new Exception('Could not load order.');
         }
 
+        // TODO: This should not all be done in one call, it should iterate over submitted IDs.
+
         // Send to Lob.
         $connector = new Checkout();
         if ($connector->fulfillOrder($order)) {
